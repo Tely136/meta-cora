@@ -1,0 +1,4 @@
+/ {
+    model = "Digilent Cora Z7-07S Development Board";
+    compatible = "digilent,zynq-coraz7", "xlnx,zynq-7000";
+};
