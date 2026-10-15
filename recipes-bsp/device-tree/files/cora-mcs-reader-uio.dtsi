@@ -1,0 +1,19 @@
+/* Linux userspace access to the HLS reader and its completion interrupt.
+ * Register address, clock and interrupt routing come from the generated SDT.
+ * GPIO retains its existing kernel driver and separate interrupt.
+ */
+&MCS_stream_reader_0 {
+    compatible = "generic-uio";
+    linux,uio-name = "stream-reader";
+};
+
+/ {
+    chosen {
+        /* The built-in UIO platform driver needs a compatible string to match.
+         * The generated Linux DTS currently has no bootargs property.
+         * EDF boot.scr reads this value and appends root=... ro rootwait.
+         * If other boot arguments are added later, retain them in this string.
+         */
+        bootargs = "uio_pdrv_genirq.of_id=generic-uio";
+    };
+};
