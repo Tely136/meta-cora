@@ -2,9 +2,9 @@
  * Register address, clock and interrupt routing come from the generated SDT.
  * GPIO retains its existing kernel driver and separate interrupt.
  */
-&MCS_stream_reader_0 {
+&MCS_multi_channel_scaler_0 {
     compatible = "generic-uio";
-    linux,uio-name = "stream-reader";
+    linux,uio-name = "multi-channel-scaler";
 };
 
 / {

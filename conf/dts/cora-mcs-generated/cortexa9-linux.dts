@@ -756,8 +756,29 @@
                 #size-cells = <0x1>;
                 firmware-name = "counter_wrapper.bit.bin";
 
-                MCS_stream_generator_0: stream_generator@40010000 {
+                MCS_multi_channel_scaler_0: multi_channel_scaler@40000000 {
                         phandle = <0x7>;
+                        interrupts = <0x0 0x1e 0x4>;
+                        compatible = "xlnx,multi-channel-scaler-1.0";
+                        xlnx,ii = "undef";
+                        xlnx,machine = <0x40>;
+                        xlnx,s-axi-control-addr-width = <0x6>;
+                        interrupt-parent = <&intc>;
+                        xlnx,ip-name = "multi_channel_scaler";
+                        reg = <0x40000000 0x10000>;
+                        clocks = <&clkc 0xf>;
+                        xlnx,clk-period = <0xa>;
+                        xlnx,s-axi-control-data-width = <0x20>;
+                        xlnx,edk-iptype = "PERIPHERAL";
+                        status = "okay";
+                        clock-names = "ap_clk";
+                        interrupt-names = "interrupt";
+                        xlnx,combinational = <0x0>;
+                        xlnx,latency = "undef";
+                };
+
+                MCS_stream_generator_0: stream_generator@40010000 {
+                        phandle = <0x8>;
                         compatible = "xlnx,stream-generator-1.0";
                         xlnx,ii = "undef";
                         xlnx,machine = <0x40>;
@@ -774,35 +795,14 @@
                         xlnx,latency = "undef";
                 };
 
-                MCS_stream_reader_0: stream_reader@40030000 {
+                MCS_trigger_0: trigger@40020000 {
                         phandle = <0x9>;
-                        interrupts = <0x0 0x1e 0x4>;
-                        compatible = "xlnx,stream-reader-1.0";
-                        xlnx,ii = "undef";
-                        xlnx,machine = <0x40>;
-                        xlnx,s-axi-control-addr-width = <0x6>;
-                        interrupt-parent = <&intc>;
-                        xlnx,ip-name = "stream_reader";
-                        reg = <0x40030000 0x10000>;
-                        clocks = <&clkc 0xf>;
-                        xlnx,clk-period = <0xa>;
-                        xlnx,s-axi-control-data-width = <0x20>;
-                        xlnx,edk-iptype = "PERIPHERAL";
-                        status = "okay";
-                        clock-names = "ap_clk";
-                        interrupt-names = "interrupt";
-                        xlnx,combinational = <0x0>;
-                        xlnx,latency = "undef";
-                };
-
-                MCS_trigger_0: trigger@40040000 {
-                        phandle = <0xa>;
                         compatible = "xlnx,trigger-1.0";
                         xlnx,ii = "undef";
                         xlnx,machine = <0x40>;
                         xlnx,s-axi-control-addr-width = <0x5>;
                         xlnx,ip-name = "trigger";
-                        reg = <0x40040000 0x10000>;
+                        reg = <0x40020000 0x10000>;
                         clocks = <&clkc 0xf>;
                         xlnx,clk-period = <0xa>;
                         xlnx,s-axi-control-data-width = <0x20>;
@@ -813,8 +813,8 @@
                         xlnx,latency = "undef";
                 };
 
-                axi_gpio_0: gpio@40020000 {
-                        phandle = <0x8>;
+                axi_gpio_0: gpio@41200000 {
+                        phandle = <0xa>;
                         #interrupt-cells = <0x2>;
                         interrupts = <0x0 0x1d 0x4>;
                         xlnx,gpio-board-interface = "btns_2bits";
@@ -827,7 +827,7 @@
                         xlnx,is-dual = <0x1>;
                         xlnx,ip-name = "axi_gpio";
                         xlnx,tri-default-2 = <0xffffffff>;
-                        reg = <0x40020000 0x10000>;
+                        reg = <0x41200000 0x10000>;
                         xlnx,all-inputs-2 = <0x0>;
                         clocks = <&clkc 0xf>;
                         xlnx,all-outputs-2 = <0x1>;
@@ -923,10 +923,10 @@
                 ptm1_out_port = "/axi/ptm@f889d000/out-ports/port/endpoint";
                 ps7_dma_ns = "/axi/ps7_dma@f8004000";
                 amba_pl = "/amba_pl";
+                MCS_multi_channel_scaler_0 = "/amba_pl/multi_channel_scaler@40000000";
                 MCS_stream_generator_0 = "/amba_pl/stream_generator@40010000";
-                MCS_stream_reader_0 = "/amba_pl/stream_reader@40030000";
-                MCS_trigger_0 = "/amba_pl/trigger@40040000";
-                axi_gpio_0 = "/amba_pl/gpio@40020000";
+                MCS_trigger_0 = "/amba_pl/trigger@40020000";
+                axi_gpio_0 = "/amba_pl/gpio@41200000";
                 ps7_ddr_0_memory = "/memory@00100000";
         };
 
